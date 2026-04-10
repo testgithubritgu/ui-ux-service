@@ -11,4 +11,4 @@ export default async function handler(req, res) {
    if (fs.access(path.join(BLOG_DIR , `${name}.json`))) return res.status(500).json({message:"already file existsync"})
    await fs.writeFile( `${BLOG_DIR}/${name}.json`,JSON.stringify(req.body),null ,2)
    return res.status(200).json({message:"success bhai"})
-} 
+}  

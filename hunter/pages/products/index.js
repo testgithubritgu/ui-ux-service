@@ -1,31 +1,37 @@
-import React from 'react'
+import User from '../../model/userSchema';
+import mongoose from 'mongoose';
+import Image from "next/image"
+export async function getServerSideProps() {
 
-export async function getServerSideProps(){
-  const res = await fetch("http://localhost:3000/api/getUsers")
-  const data = await res.json()
+  await mongoose.connect(process.env.MONGO_URL)
+  const users = await User.find();
+  const updateData = {}
+  for (let item of users) {
+    if (item.name in updateData) {
+      if (updateData[item.name] && updateData[item.name].age > 20) {
+        updateData[item.name].age = 40
+      }
+    } else {
+      updateData[item.name] = JSON.parse(JSON.stringify(item))
+    } 
+  }
+
+
   return {
-    props:{
-      data:[...data.users]
+    props: {
+      data: updateData
     },
-    revalidate:5
   }
 }
 
-const index = ({data}) => {
-  if(!data) return <p>no data</p>
+const index = ({ data }) => {
+  if (!data) return <p>no data</p>
   console.log(data)
   return (
     <div>
-      {data.map((user,idx)=>(
-        <div>
-          {user.name}
-        </div>
-      ))}
+      <Image width={500} height={400}  src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg" alt="" />
     </div>
   )
 }
-
-
-
 
 export default index

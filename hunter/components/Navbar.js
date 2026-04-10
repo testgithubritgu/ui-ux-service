@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from "next/link"
 
 const Navbar = () => {
@@ -7,7 +6,7 @@ const Navbar = () => {
         <ol className='w-full flex justify-center items-center gap-3'>
 
       {["About","Process","Contact"].map((item)=>( 
-          <Link href={`/${item.toLocaleLowerCase()}`}>  <li className='cursor-pointer'>{item}</li></Link>
+          <Link key={item} href={`/${item.toLocaleLowerCase()}`}>  <li className='cursor-pointer'>{item}</li></Link>
         ))}
         </ol>
     </div>
