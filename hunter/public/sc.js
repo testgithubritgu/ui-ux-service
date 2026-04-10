@@ -1,0 +1,3 @@
+const simplefunc = ()=>{
+    alert("clicked")
+}
