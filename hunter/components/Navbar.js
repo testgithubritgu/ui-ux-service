@@ -1,16 +1,18 @@
 import Link from "next/link"
+import { memo } from "react"
 
 const Navbar = () => {
+  console.log('navbar rener')
   return (
     <div className='w-full '> 
         <ol className='w-full flex justify-center items-center gap-3'>
 
-      {["About","Process","Contact"].map((item)=>( 
-          <Link key={item} href={`/${item.toLocaleLowerCase()}`}>  <li className='cursor-pointer'>{item}</li></Link>
+      {["about","products","contact"].map((item)=>( 
+        <Link key={item} href={`/${item.toLocaleLowerCase()}`}>  <li >{item}</li></Link>
         ))}
         </ol>
     </div>
   )
 }
  
-export default Navbar
+export default memo(Navbar)
